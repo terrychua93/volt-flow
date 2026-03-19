@@ -6,7 +6,16 @@
     "outDir": "./out-tsc/app",
     "types": [
       "node"
-    ]
+    ],
+    "baseUrl": "./src/app",
+    "paths": {
+      "@/*": ["*"],
+      "@assets/*": ["assets/*"],
+      "@interfaces/*": ["interfaces/*"],
+      "@datas/*": ["datas/*"],
+      "@shared/*": ["shared/*"],
+      "@components/*": ["shared/components/*"]
+    }
   },
   "include": [
     "src/**/*.ts"
