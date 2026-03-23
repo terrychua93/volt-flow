@@ -1,0 +1,29 @@
+<div *ngIf="show()" class="bg-[#edf8fe] text-secondary text-sm">
+  <div class="max-w-7xl mx-auto px-4 md:px-6 w-full font-medium text-[16px]">
+    <div class="flex justify-between items-center py-2">
+      
+      <!-- Address -->
+      <div class="flex items-center space-x-2">
+        <i class="pi pi-map-marker text-primary"></i>
+        <span>{{ address }}</span>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="flex items-center space-x-4">
+        <div class="flex items-center space-x-2">
+          <i class="pi pi-phone text-primary"></i>
+          <a href="tel:{{ phoneLink }}" class="hover:text-primary transition-colors duration-200">
+            {{ phone }}
+          </a>
+        </div>
+        <div class="flex items-center space-x-2">
+          <i class="pi pi-envelope text-primary"></i>
+          <a href="mailto:{{ email }}" class="hover:text-primary transition-colors duration-200">
+            {{ email }}
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

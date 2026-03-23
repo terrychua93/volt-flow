@@ -1,1 +1,175 @@
-<p>header works!</p>
+<header
+  class="fixed top-0 left-0 w-full z-30 transition-all duration-300 bg-jade-light shadow-md backdrop-blur-sm overflow-hidden"
+  [class.translate-y-0]="showNavbar()"
+  [class.-translate-y-full]="!showNavbar()"
+  [class.h-screen]="menuOpen()"
+  [class.md:h-auto]="true"
+>
+  <!-- TopInfobar hidden on mobile -->
+  <app-topinfobar *ngIf="!menuOpen()"></app-topinfobar>
+
+  <div class="max-w-7xl mx-auto p-5">
+    <div class="grid grid-cols-[auto_1fr_auto] items-center py-2">
+
+      <!-- Logo -->
+      <div class="flex items-center cursor-pointer" (click)="scrollToTop()">
+        <img src="./assets/images/logo-light.png" alt="Logo" class="w-38.75" />
+      </div>
+
+      <!-- Desktop Menu -->
+      <nav class="hidden md:flex ml-20 items-center space-x-6 font-semibold text-[18px]">
+        <ng-container *ngFor="let item of navItems; let i = index">
+          <!-- Item with children (dropdown) -->
+          <div *ngIf="item.children; else singleItem" class="relative group">
+            <button
+              class="py-3 px-2 text-[var(--color-secondary)] hover:text-[var(--color-primary)] transition-colors duration-200 flex items-center space-x-1"
+            >
+              <span>{{ item.label }}</span>
+              <i class="pi pi-angle-down text-sm"></i>
+            </button>
+
+            <!-- Dropdown -->
+            <div
+              class="absolute left-0 top-full mt-2 w-56 bg-white shadow-lg rounded-xl
+                     opacity-0 invisible group-hover:opacity-100 group-hover:visible
+                     transition-all duration-200 overflow-hidden z-50"
+            >
+              <button *ngFor="let child of item.children" (click)="scrollTo(child.id)"
+                class="block w-full text-left px-5 py-3 hover:bg-gray-100 transition text-[16px]">
+                {{ child.label }}
+              </button>
+            </div>
+          </div>
+
+          <!-- Single item -->
+          <ng-template #singleItem>
+            <button (click)="scrollTo(item.id)"
+              class="py-3 px-2 text-[var(--color-secondary)] hover:text-[var(--color-primary)] transition-colors duration-200 font-semibold">
+              {{ item.label }}
+            </button>
+          </ng-template>
+        </ng-container>
+      </nav>
+
+      <!-- Right Side -->
+      <div class="flex items-center space-x-4 justify-end">
+        <!-- WhatsApp Desktop -->
+        <a href="https://wa.me/+601110721993" target="_blank"
+           class="hidden md:flex items-center bg-white rounded-full px-4 py-3 shadow-md hover:shadow-lg space-x-2">
+          <i class="pi pi-whatsapp text-2xl text-green-500"></i>
+          <span class="font-semibold">Chat with us</span>
+        </a>
+
+        <!-- Hamburger -->
+        <button class="md:hidden text-2xl" (click)="menuOpen.set(true)">
+          <i class="pi pi-bars text-primary"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+<!-- Mobile Drawer -->
+<div *ngIf="menuOpen()" class="fixed inset-0 z-100 flex">
+  <!-- Backdrop -->
+  <div
+    class="fixed inset-0 bg-black/50 transition-opacity duration-300"
+    [class.opacity-0]="closing()"
+    [class.opacity-100]="!closing()"
+    (click)="closeMenu()"
+  ></div>
+
+  <!-- Drawer -->
+  <div
+    class="relative w-75 h-full bg-secondary flex flex-col
+           transition-transform duration-300 ease-in-out"
+    [class.translate-x-0]="!closing()"
+    [class.-translate-x-full]="closing()"
+    data-aos="fade-right"
+    data-aos-duration="400"
+  >
+    <!-- Close Button -->
+    <button
+      class="self-end text-xl p-4 text-white"
+      (click)="menuOpen.set(false)"
+      aria-label="Close menu"
+      data-aos="fade"
+      data-aos-delay="50"
+    >
+      <i class="pi pi-times"></i>
+    </button>
+
+    <!-- Logo -->
+    <div class="flex justify-center mb-6">
+      <img src="./assets/images/logo-light-white.png" alt="Logo" class="w-40" />
+    </div>
+
+    <!-- Menu Items -->
+    <ul class="flex flex-col px-4">
+      <li *ngFor="let item of navItems; let i = index"
+          data-aos="fade-right"
+          [attr.data-aos-delay]="i * 100"
+          data-aos-duration="400"
+          data-aos-easing="ease-in-out"
+          class="border-b border-white/50"
+      >
+        <div *ngIf="item.children; else singleMobileItem">
+          <button
+            (click)="item.expanded = !item.expanded"
+            class="w-full flex justify-between items-center py-3 px-2 font-semibold text-white hover:text-primary transition-colors bg-[var(--color-secondary)/10] rounded cursor-pointer"
+          >
+            {{ item.label }}
+            <span
+                class="w-8 h-8 flex items-center justify-center rounded transition-all duration-300 hover:text-secondary"
+                [ngClass]="{
+                'bg-primary text-white': !item.expanded,
+                'bg-green-500 text-white rotate-90': item.expanded
+                }"
+            >
+                <i class="pi pi-angle-right text-sm"></i>
+            </span>
+          </button>
+          <ul *ngIf="item.expanded" class="ml-4 flex flex-col space-y-1">
+            <li *ngFor="let child of item.children" 
+                class="border-b border-white/50 last:border-0">
+            <button
+                (click)="scrollTo(child.id)"
+                class="block w-full text-left py-2 px-3 rounded text-white cursor-pointer"
+            >
+                {{ child.label }}
+            </button>
+            </li>
+          </ul>
+        </div>
+        <ng-template #singleMobileItem>
+          <button
+            (click)="scrollTo(item.id)"
+            class="w-full text-left py-3 px-2 font-semibold text-white hover:text-primary rounded transition-colors cursor-pointer"
+          >
+            {{ item.label }}
+          </button>
+        </ng-template>
+      </li>
+    </ul>
+
+    <!-- Contact Info -->
+    <ul class="mt-auto px-4 space-y-2 text-white">
+      <li class="flex items-center space-x-2">
+        <i class="pi pi-envelope"></i>
+        <a href="mailto:info@example.com" class="hover:text-primary">info@example.com</a>
+      </li>
+      <li class="flex items-center space-x-2">
+        <i class="pi pi-phone"></i>
+        <a href="tel:629-555-0129" class="hover:text-primary">(629) 555-0129</a>
+      </li>
+    </ul>
+
+    <!-- Social Icons -->
+    <div class="flex justify-center space-x-4 mt-4 mb-6 text-white">
+      <a href="#"><i class="pi pi-facebook"></i></a>
+      <a href="#"><i class="pi pi-twitter"></i></a>
+      <a href="#"><i class="pi pi-instagram"></i></a>
+      <a href="#"><i class="pi pi-linkedin"></i></a>
+    </div>
+  </div>
+</div>
+</header>
