@@ -1,0 +1,69 @@
+<div class="relative w-full h-150 overflow-hidden">
+
+  @for (slide of slides; track slide.id; let i = $index) {
+    <div
+      class="absolute inset-0 transition-opacity duration-700"
+      [class.opacity-100]="activeIndex() === i"
+      [class.opacity-0]="activeIndex() !== i"
+    >
+      <!-- Background Image -->
+      <div
+        class="absolute inset-0 bg-cover bg-center"
+        [style.backgroundImage]="'url(' + slide.bgImage + ')'"
+      ></div>
+
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-secondary/70"></div>
+
+      <!-- Content -->
+      <div class="relative container lg:mx-30 sm:mx-auto h-full flex items-center z-10 px-4 sm:px-6 xs:px-3">
+        <div class="max-w-xl text-white uppercase font-bold">
+
+          <!-- Subtitle -->
+          <h5
+            class="text-[18px] mb-2 text-[#36DB9F] font-medium"
+            data-aos="fade-right"
+            data-aos-delay="0"
+          >
+            {{ slide.subTitle }}
+          </h5>
+
+          <!-- Title -->
+          <h2
+            class="text-5xl lg:text-6xl sm:text-4xl font-bold mb-4 leading-tight "
+            data-aos="fade-right"
+            data-aos-delay="150"
+          >
+            {{ slide.title }}
+          </h2>
+
+          <!-- Text -->
+          <p
+            class="mb-10 capitalize sm:text-lg text-lg font-medium"
+            data-aos="fade-right"
+            data-aos-delay="300"
+          >
+            {{ slide.text }}
+          </p>
+
+          <!-- Button -->
+          @if (slide.btnText && slide.btnLink) {
+            <a
+              [href]="slide.btnLink"
+              data-aos="fade-up"
+              class="relative inline-block px-8 py-4 font-bold uppercase tracking-wide
+                     bg-primary hover:bg-secondary text-white rounded overflow-hidden
+                     transition-all duration-300"
+            >
+              <span class="relative z-10">
+                {{ slide.btnText }}
+              </span>
+            </a>
+          }
+
+        </div>
+      </div>
+    </div>
+  }
+
+</div>

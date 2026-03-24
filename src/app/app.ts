@@ -1,7 +1,7 @@
 import { Component, signal, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import AOS from 'aos';
-import { HeaderComponent } from './core/layout/header/header';
+import { HeaderComponent } from "./core/layout/header/header";
 
 @Component({
   selector: 'app-root',

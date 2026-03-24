@@ -1,5 +1,5 @@
 <header
-  class="fixed top-0 left-0 w-full z-30 transition-all duration-300 bg-jade-light shadow-md backdrop-blur-sm overflow-hidden"
+  class="fixed top-0 left-0 w-full z-30 transition-all duration-300 bg-white shadow-md backdrop-blur-sm overflow-hidden"
   [class.translate-y-0]="showNavbar()"
   [class.-translate-y-full]="!showNavbar()"
   [class.h-screen]="menuOpen()"
@@ -17,7 +17,7 @@
       </div>
 
       <!-- Desktop Menu -->
-      <nav class="hidden md:flex ml-20 items-center space-x-6 font-semibold text-[18px]">
+      <nav class="hidden lg:flex ml-20 items-center space-x-6 font-semibold text-[18px]">
         <ng-container *ngFor="let item of navItems; let i = index">
           <!-- Item with children (dropdown) -->
           <div *ngIf="item.children; else singleItem" class="relative group">
@@ -55,13 +55,13 @@
       <div class="flex items-center space-x-4 justify-end">
         <!-- WhatsApp Desktop -->
         <a href="https://wa.me/+601110721993" target="_blank"
-           class="hidden md:flex items-center bg-white rounded-full px-4 py-3 shadow-md hover:shadow-lg space-x-2">
+           class="hidden lg:flex items-center bg-white rounded-full px-4 py-3 shadow-md hover:shadow-lg space-x-2">
           <i class="pi pi-whatsapp text-2xl text-green-500"></i>
           <span class="font-semibold">Chat with us</span>
         </a>
 
         <!-- Hamburger -->
-        <button class="md:hidden text-2xl" (click)="menuOpen.set(true)">
+        <button class="lg:hidden text-2xl" (click)="menuOpen.set(true)">
           <i class="pi pi-bars text-primary"></i>
         </button>
       </div>
@@ -69,7 +69,7 @@
   </div>
 
 <!-- Mobile Drawer -->
-<div *ngIf="menuOpen()" class="fixed inset-0 z-100 flex">
+<div @defer *ngIf="menuOpen()" class="fixed inset-0 z-100 flex">
   <!-- Backdrop -->
   <div
     class="fixed inset-0 bg-black/50 transition-opacity duration-300"

@@ -8,7 +8,7 @@ import { Component, OnInit, signal } from '@angular/core';
   templateUrl: './topinfobar.html',
   styleUrls: ['./topinfobar.css']
 })
-export class TopInfobarComponent implements OnInit {
+export class TopInfobar implements OnInit {
   address = '6391 Elgin St. Celina, Delaware 10299';
   phone = '(629) 555-0129';
   email = 'info@example.com';

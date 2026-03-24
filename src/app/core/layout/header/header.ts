@@ -2,12 +2,12 @@ import { Component, HostListener, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NAV_ITEMS } from '@datas/navItems';
 import { NavItem } from '@/interfaces/navItem';
-import { TopInfobarComponent } from '../topinfobar/topinfobar';
+import { TopInfobar } from '../topinfobar/topinfobar';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ TopInfobarComponent, CommonModule ],
+  imports: [ TopInfobar, CommonModule ],
   templateUrl: './header.html',
 })
 export class HeaderComponent {
