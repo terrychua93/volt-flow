@@ -1,0 +1,38 @@
+<div class="sm:px-9 lg:px-12">
+
+    <div class="max-w-7xl mx-auto">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            @for (service of services; track service.title) {
+                <div class="group bg-white rounded-xl shadow-lg p-8 text-center transition-all duration-300 hover:bg-primary hover:-translate-y-2 hover:shadow-2xl">
+                    <!-- Icon Circle -->
+                    <div class="w-25 h-25 rounded-full
+                                flex items-center justify-center
+                                bg-primary text-white
+                                text-[65px]
+                                mx-auto mb-6
+                                transition-all duration-300
+                                group-hover:bg-secondary group-hover:scale-110">
+                        <i [class]="service.icon"></i>
+                    </div>
+
+                    <!-- Title -->
+                    <h3 class="text-2xl font-bold leading-tight capitalize mb-5
+                                transition-colors duration-300 hover:text-secondary hover:underline cursor-pointer
+                                group-hover:text-white">
+                        {{ service.title }}
+                    </h3>
+
+                    <!-- Text -->
+                    <p class="text-[17px] text-gray-text leading-[1.88] text-text transition-colors duration-300 group-hover:text-white/90">
+                        {{ service.text }}
+                    </p>
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>

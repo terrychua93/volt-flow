@@ -5,10 +5,18 @@
 @theme {
   --color-primary: #018BF8; /* Example Blue */
   --color-secondary: #0F3567; /* Example Pink */
+  --color-gray-text: #616670; /* Example Gray */
+  --color-ocean-blue: #EDF8FE;
 }
 
 :root {
   --color-primary: #018BF8;
   --color-secondary: #0F3567;
   --color-white: #FFFFFF;
+  --color-gray-text: #616670;
+  --color-ocean-blue: #EDF8FE;
+}
+
+html{
+    background-color: var(--color-ocean-blue);
 }
